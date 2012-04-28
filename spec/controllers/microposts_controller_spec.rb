@@ -62,7 +62,21 @@ describe MicropostsController do
 			end
 		end
 
-
+		describe "DELETE 'destroy'" do
+			describe "for an unauthorized user" do
+				before(:each) do
+					@user = Factory(:user, :email => "some@some.com")
+					wrong_user = Factory(:user, :email => "some1@some.com")
+					test_sign_in(wrong_user)
+					@micropost = Factory(:micropost, :user => @user)
+				end
+		
+				it "should deny access" do
+					delete :destroy, :id => @micropost
+					response.should redirect_to(root_path)
+				end
+			end
+		end
 		
 	end
 
