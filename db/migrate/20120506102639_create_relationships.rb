@@ -5,9 +5,9 @@ class CreateRelationships < ActiveRecord::Migration
       t.integer :followed_id
 
       t.timestamps
-      add_index   :relationships, :follower_id
-      add_index   :relationships, :followed_id
     end
+    add_index   :relationships, :follower_id
+    add_index   :relationships, :followed_id
   end
 
   def self.down
